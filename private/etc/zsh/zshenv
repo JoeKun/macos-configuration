@@ -1,0 +1,71 @@
+# /etc/zsh/zshenv
+# 
+# Configuration file for zsh
+# 
+# Originally taken from files available at 
+# http://formation-debian.via.ecp.fr/fichiers-config.tar.gz
+# which are part of the "Formation Debian GNU/Linux".
+# 
+# Modified by Joel Lopes Da Silva.
+
+# Changes the HOME variable for root if needed; this is useful for using
+# `sudo -s` just like `su`.
+if [[ $(id -u) -eq 0 ]]
+then
+    export HOME=/private/var/root
+fi
+
+# PATH & MANPATH
+if [[ -x /usr/libexec/path_helper ]]
+then
+    eval $(/usr/libexec/path_helper -s)
+    __path_helper_standard_paths=$(cat /etc/paths | tr "\n" ":" | sed "s/:*$//")
+    export PATH=$(echo "${PATH}" | sed "s|^${__path_helper_standard_paths}:||" | sed "s|$|:${__path_helper_standard_paths}|")
+    unset __path_helper_standard_paths
+fi
+
+# INFOPATH
+export INFOPATH="/usr/share/info:/usr/local/share/info"
+
+# Default viewer and editor (for Crontab, CVS, ...)
+export VISUAL=vim
+export EDITOR=vim
+
+# Default pager (for man, ...)
+which vimpager > /dev/null
+if [[ $? -eq 0 ]]
+then
+    export PAGER=vimpager
+else
+    which most > /dev/null
+    if [[ $? -eq 0 ]]
+    then
+        export PAGER=most
+    else
+        export PAGER=less
+    fi
+fi
+
+# Permissions rw-r--r-- for created files
+# and rwxr-xr-x for created directories
+umask 022
+
+# HTTP/FTP Proxy without password
+#export http_proxy="http://proxy.exemple.org:8080"
+#export ftp_proxy="ftp://proxy.exemple.org:8080"
+
+# HTTP/FTP Proxy with password
+#export http_proxy="http://login:password@proxy.exemple.org:8080"
+#export ftp_proxy="ftp://login:password@proxy.exemple.org:8080"
+
+# Don't use the proxy for local domains
+#export no_proxy="exemple.org"
+
+# Use color for grep
+export GREP_OPTIONS='--color=auto'
+
+# Make sure user settings for login is not preserved from previous shells.
+unset LOGIN_GREETING_NAME
+unset LOGIN_GREETING_SLANTED_TEXT_DISABLED
+unset FORTUNE_UPON_LOGIN_DISABLED
+
