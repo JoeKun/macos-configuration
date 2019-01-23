@@ -99,7 +99,7 @@ case ${TERM} in
 esac
 
 # Color management for `ls` (exporting LS_COLORS)
-if [[ -x /usr/bin/dircolors ]]
+if [[ ${+commands[dircolors]} -ne 0 ]]
 then
     if [[ -r ~/.dir_colors ]]
     then
