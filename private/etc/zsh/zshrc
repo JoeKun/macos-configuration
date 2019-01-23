@@ -29,7 +29,7 @@ alias lla="ls -la"
 alias su="sudo -s"
 
 # updatedb
-alias updatedb="cd / && /usr/libexec/locate.updatedb ; cd - > /dev/null"
+alias updatedb="pushd / && /usr/libexec/locate.updatedb ; popd"
 
 # Some handy aliases
 alias c="clear"
