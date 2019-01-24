@@ -62,6 +62,12 @@ umask 022
 # Use color for grep
 export GREP_OPTIONS='--color=auto'
 
+# Set active coloring theme for markdown viewer mdv (if present).
+if [[ ${+commands[mdv]} -ne 0 ]]
+then
+    export MDV_THEME="880.1331" # Bubblegum Bitch
+fi
+
 # Adjusting behavior of Homebrew.
 # Homebrew is very particular about using the default prefix of
 # /usr/local, and certain bottles just don't work right if we have a
