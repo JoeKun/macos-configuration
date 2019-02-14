@@ -4,15 +4,26 @@
 [core]
 	abbrev = 12
 	excludesfile = /Users/foo/.gitignore_global
-	pager = /opt/local/share/git-core/contrib/diff-highlight/diff-highlight | vimpager
+	pager = /opt/pkg/bin/diff-so-fancy | vimpager
+[push]
+	default = simple
+[apply]
+	whitespace = nowarn
 [color]
 	ui = true
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
-[push]
-	default = simple
-[apply]
-	whitespace = nowarn
+[diff-so-fancy]
+	stripLeadingSymbols = false
+	markEmptyLines = false
+	rulerWidth = 120
