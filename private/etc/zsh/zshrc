@@ -248,51 +248,6 @@ setopt hist_find_no_dups
 
 
 #-----------------------------------------------------------
-# Homebrew Support
-#-----------------------------------------------------------
-
-if [[ ${+commands[brew]} -ne 0 ]]
-then
-    function brew() {
-        local brew_prefix=$(command brew --prefix)
-        local brew_share_vim_directory_path="${brew_prefix}/share/vim"
-        local brew_share_vim_vimrc_path="${brew_share_vim_directory_path}/vimrc"
-        local brew_share_vim_vimrc_symbolic_link_destination=""
-        if [[ -L "${brew_share_vim_vimrc_path}" ]]
-        then
-            brew_share_vim_vimrc_symbolic_link_destination=$(readlink "${brew_share_vim_vimrc_path}")
-        fi
-        
-        local brew_transient_temporary_directory=""
-        if [[ ${+HOMEBREW_TEMP} -eq 0 ]]
-        then
-            local brew_volume_path=$(df -P "${brew_prefix}" | tail -n 1 | awk '{ print $6 }')
-            if [[ "${brew_volume_path}" != "/" ]]
-            then
-                brew_transient_temporary_directory=$(mktemp -d "${brew_prefix}/tmp_brew_improved_command.XXXXXX")
-                export HOMEBREW_TEMP="${brew_transient_temporary_directory}"
-            fi
-        fi
-        
-        command brew "$@"
-        
-        if [[ -n "${brew_transient_temporary_directory}" ]]
-        then
-            unset HOMEBREW_TEMP
-            rm -R -f "${brew_transient_temporary_directory}"
-        fi
-        
-        if [[ -n "${brew_share_vim_vimrc_symbolic_link_destination}" ]] && [[ ! -L "${brew_share_vim_vimrc_path}" ]]
-        then
-            pushd "${brew_share_vim_directory_path}"
-            ln -s "${brew_share_vim_vimrc_symbolic_link_destination}"
-            popd
-        fi
-    }
-fi
-
-
-#-----------------------------------------------------------
 # RVM Support
 #-----------------------------------------------------------
 

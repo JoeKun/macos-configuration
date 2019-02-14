@@ -4,6 +4,5 @@
 # Personal aliases
 #-----------------------------------------------------------
 
-# Frequently used applications
-alias upgrade="brew update && brew upgrade && brew cleanup -s"
+# Nothing yet.
 

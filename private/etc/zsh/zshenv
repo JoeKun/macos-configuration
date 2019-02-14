@@ -68,19 +68,6 @@ then
     export MDV_THEME="880.1331" # Bubblegum Bitch
 fi
 
-# Adjusting behavior of Homebrew.
-# Homebrew is very particular about using the default prefix of
-# /usr/local, and certain bottles just don't work right if we have a
-# different prefix; in such a case, it's safer to always build from
-# source, despite the annoying warnings.
-if [[ ${+commands[brew]} -ne 0 ]]
-then
-    if [[ "$(brew --prefix)" != "/usr/local" ]]
-    then
-        export HOMEBREW_BUILD_FROM_SOURCE=1
-    fi
-fi
-
 # Make sure user settings for login is not preserved from previous shells.
 unset LOGIN_GREETING_NAME
 unset LOGIN_GREETING_SLANTED_TEXT_DISABLED

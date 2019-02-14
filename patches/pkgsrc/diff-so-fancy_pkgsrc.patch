@@ -1,0 +1,84 @@
+From 54f36683c7789ab4204b5ef735f04a7445be5feb Mon Sep 17 00:00:00 2001
+From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
+Date: Thu, 31 Jan 2019 09:09:16 -0800
+Subject: [PATCH] Add package for diff-so-fancy.
+
+---
+ textproc/diff-so-fancy/DESCR    |  2 ++
+ textproc/diff-so-fancy/Makefile | 27 +++++++++++++++++++++++++++
+ textproc/diff-so-fancy/PLIST    |  6 ++++++
+ textproc/diff-so-fancy/distinfo |  6 ++++++
+ 4 files changed, 41 insertions(+)
+ create mode 100644 textproc/diff-so-fancy/DESCR
+ create mode 100644 textproc/diff-so-fancy/Makefile
+ create mode 100644 textproc/diff-so-fancy/PLIST
+ create mode 100644 textproc/diff-so-fancy/distinfo
+
+diff --git a/textproc/diff-so-fancy/DESCR b/textproc/diff-so-fancy/DESCR
+new file mode 100644
+index 000000000000..74038c4c82c7
+--- /dev/null
++++ b/textproc/diff-so-fancy/DESCR
+@@ -0,0 +1,2 @@
++diff-so-fancy strives to make your diff's human readable instead of machine
++readable. This helps improve code quality and help you spot defects faster.
+diff --git a/textproc/diff-so-fancy/Makefile b/textproc/diff-so-fancy/Makefile
+new file mode 100644
+index 000000000000..226d3458c264
+--- /dev/null
++++ b/textproc/diff-so-fancy/Makefile
+@@ -0,0 +1,27 @@
++# $NetBSD: Makefile,v 1.0 2019/01/31 01:42:07 joel Exp $
++
++DISTNAME=	diff-so-fancy-1.2.5
++CATEGORIES=	textproc
++MASTER_SITES=	${MASTER_SITE_GITHUB:=so-fancy/}
++GITHUB_PROJECT=	${PKGBASE}
++GITHUB_TAG=	v${PKGVERSION_NOREV}
++
++MAINTAINER=	rakuco@FreeBSD.org
++HOMEPAGE=	https://github.com/so-fancy/diff-so-fancy/
++COMMENT=	Fancier diff output formatter
++LICENSE=	mit
++
++NO_BUILD=	yes
++USE_LANGUAGES=	# none
++USE_TOOLS=	perl:run
++
++REPLACE_PERL+=	${PKGBASE}
++
++INSTALLATION_DIRS=	bin ${PERL5_SUB_INSTALLVENDORLIB} share/doc/${PKGBASE}
++
++do-install:
++	${INSTALL_SCRIPT} ${WRKSRC}/${PKGBASE} ${DESTDIR}${PREFIX}/bin
++	${INSTALL_DATA}	${WRKSRC}/lib/DiffHighlight.pm ${DESTDIR}${PREFIX}/${PERL5_SUB_INSTALLVENDORLIB}
++	${INSTALL_DATA} ${WRKSRC}/README.md ${WRKSRC}/history.md ${WRKSRC}/pro-tips.md ${DESTDIR}${PREFIX}/share/doc/${PKGBASE}
++
++.include "../../mk/bsd.pkg.mk"
+diff --git a/textproc/diff-so-fancy/PLIST b/textproc/diff-so-fancy/PLIST
+new file mode 100644
+index 000000000000..61b9efacfc08
+--- /dev/null
++++ b/textproc/diff-so-fancy/PLIST
+@@ -0,0 +1,6 @@
++@comment $NetBSD: PLIST,v 1.0 2019/01/31 01:44:42 joel Exp $
++bin/diff-so-fancy
++${PERL5_SUB_INSTALLVENDORLIB}/DiffHighlight.pm
++share/doc/diff-so-fancy/README.md
++share/doc/diff-so-fancy/history.md
++share/doc/diff-so-fancy/pro-tips.md
+diff --git a/textproc/diff-so-fancy/distinfo b/textproc/diff-so-fancy/distinfo
+new file mode 100644
+index 000000000000..e451f8797d8c
+--- /dev/null
++++ b/textproc/diff-so-fancy/distinfo
+@@ -0,0 +1,6 @@
++$NetBSD: distinfo,v 1.0 2019/01/31 01:50:53 joel Exp $
++
++SHA1 (diff-so-fancy-1.2.5.tar.gz) = 5174a7f5bb46c2784a74c01dbbe9e5c82fe3b441
++RMD160 (diff-so-fancy-1.2.5.tar.gz) = 991b822225580c05aa9c14a5886398f9906ad113
++SHA512 (diff-so-fancy-1.2.5.tar.gz) = bc3fae2d7364d43f6b9608d8d748ba8c6c7d4699da769bb121d9b48b37a08e3e3ebe45642e879956809688c1bfa507c844165a23b91013f0f5a71ddde6523979
++Size (diff-so-fancy-1.2.5.tar.gz) = 41508 bytes
+-- 
+2.19.0
+
