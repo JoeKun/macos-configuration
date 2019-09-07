@@ -1,4 +1,4 @@
-From 8ee1a56e651b7ce2d026bfbdbff910e321183bac Mon Sep 17 00:00:00 2001
+From 8ddb6eb0aa713e06f9a2200c7a19311f79753e72 Mon Sep 17 00:00:00 2001
 From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
 Date: Thu, 31 Jan 2019 17:28:51 -0800
 Subject: [PATCH] vimpager: upgrade to 2.06 and backport from unreleased HEAD a
@@ -523,5 +523,5 @@ index 000000000000..730877f0736a
 + "  call Dret("AnsiEsc#AnsiEsc")
 + endfun
 -- 
-2.19.0
+2.23.0
 

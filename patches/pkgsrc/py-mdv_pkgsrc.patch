@@ -1,4 +1,4 @@
-From 45891fbef57ca273c52a98f908b9b9c4a9d50fc0 Mon Sep 17 00:00:00 2001
+From 00d36109bc1a0145998cfb5cbce1aac29ccc3eba Mon Sep 17 00:00:00 2001
 From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
 Date: Thu, 31 Jan 2019 12:06:42 -0800
 Subject: [PATCH] Add package for py-mdv.
@@ -105,5 +105,5 @@ index 000000000000..f47f6a71b016
 +SHA512 (mdv-1.6.3.tar.gz) = fdf79d4c67c5fe4b367397d9fa4d6559ff18671fc7cd88c1815b4acaf257afd5b088a37c3a09665439170dc89ce03f894b1416a28f1406591356d5d50c5eb5b9
 +Size (mdv-1.6.3.tar.gz) = 1122685 bytes
 -- 
-2.19.0
+2.23.0
 
