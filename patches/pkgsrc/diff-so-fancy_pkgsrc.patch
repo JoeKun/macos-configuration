@@ -1,18 +1,22 @@
-From 54f36683c7789ab4204b5ef735f04a7445be5feb Mon Sep 17 00:00:00 2001
+From 65bcb384a5fad29852d70402757df78e5cf5491f Mon Sep 17 00:00:00 2001
 From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
 Date: Thu, 31 Jan 2019 09:09:16 -0800
 Subject: [PATCH] Add package for diff-so-fancy.
 
 ---
- textproc/diff-so-fancy/DESCR    |  2 ++
- textproc/diff-so-fancy/Makefile | 27 +++++++++++++++++++++++++++
- textproc/diff-so-fancy/PLIST    |  6 ++++++
- textproc/diff-so-fancy/distinfo |  6 ++++++
- 4 files changed, 41 insertions(+)
+ textproc/diff-so-fancy/DESCR                  |  2 ++
+ textproc/diff-so-fancy/Makefile               | 28 +++++++++++++++++++
+ textproc/diff-so-fancy/PLIST                  |  6 ++++
+ textproc/diff-so-fancy/distinfo               |  8 ++++++
+ ...ew-ruler-width-offset-configuration-option | 28 +++++++++++++++++++
+ .../patch-diff-so-fancy-fix-version-to-1.2.7  | 26 +++++++++++++++++
+ 6 files changed, 98 insertions(+)
  create mode 100644 textproc/diff-so-fancy/DESCR
  create mode 100644 textproc/diff-so-fancy/Makefile
  create mode 100644 textproc/diff-so-fancy/PLIST
  create mode 100644 textproc/diff-so-fancy/distinfo
+ create mode 100644 textproc/diff-so-fancy/patches/patch-diff-so-fancy-add-new-ruler-width-offset-configuration-option
+ create mode 100644 textproc/diff-so-fancy/patches/patch-diff-so-fancy-fix-version-to-1.2.7
 
 diff --git a/textproc/diff-so-fancy/DESCR b/textproc/diff-so-fancy/DESCR
 new file mode 100644
@@ -24,13 +28,14 @@ index 000000000000..74038c4c82c7
 +readable. This helps improve code quality and help you spot defects faster.
 diff --git a/textproc/diff-so-fancy/Makefile b/textproc/diff-so-fancy/Makefile
 new file mode 100644
-index 000000000000..226d3458c264
+index 000000000000..fc53c2b2463d
 --- /dev/null
 +++ b/textproc/diff-so-fancy/Makefile
-@@ -0,0 +1,27 @@
+@@ -0,0 +1,28 @@
 +# $NetBSD: Makefile,v 1.0 2019/01/31 01:42:07 joel Exp $
 +
-+DISTNAME=	diff-so-fancy-1.2.5
++DISTNAME=	diff-so-fancy-1.2.7
++PKGREVISION=	1
 +CATEGORIES=	textproc
 +MASTER_SITES=	${MASTER_SITE_GITHUB:=so-fancy/}
 +GITHUB_PROJECT=	${PKGBASE}
@@ -69,16 +74,84 @@ index 000000000000..61b9efacfc08
 +share/doc/diff-so-fancy/pro-tips.md
 diff --git a/textproc/diff-so-fancy/distinfo b/textproc/diff-so-fancy/distinfo
 new file mode 100644
-index 000000000000..e451f8797d8c
+index 000000000000..e9305acaf9d1
 --- /dev/null
 +++ b/textproc/diff-so-fancy/distinfo
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,8 @@
 +$NetBSD: distinfo,v 1.0 2019/01/31 01:50:53 joel Exp $
 +
-+SHA1 (diff-so-fancy-1.2.5.tar.gz) = 5174a7f5bb46c2784a74c01dbbe9e5c82fe3b441
-+RMD160 (diff-so-fancy-1.2.5.tar.gz) = 991b822225580c05aa9c14a5886398f9906ad113
-+SHA512 (diff-so-fancy-1.2.5.tar.gz) = bc3fae2d7364d43f6b9608d8d748ba8c6c7d4699da769bb121d9b48b37a08e3e3ebe45642e879956809688c1bfa507c844165a23b91013f0f5a71ddde6523979
-+Size (diff-so-fancy-1.2.5.tar.gz) = 41508 bytes
++SHA1 (diff-so-fancy-1.2.7.tar.gz) = 0b574b3e7b983e943e5ce4f75129725aecec0cc6
++RMD160 (diff-so-fancy-1.2.7.tar.gz) = 0f9e585f9bbd4d0b6b2633a80cc228e072eecd69
++SHA512 (diff-so-fancy-1.2.7.tar.gz) = 7399ac5487052b885ce35ae09c44ffb50d11ee6a219d1bac467250fb29d3c9233eaf9ec4b304bcec283bb1434bb825c819b9b5760fb068f6fa538685c2f2daa5
++Size (diff-so-fancy-1.2.7.tar.gz) = 43582 bytes
++SHA1 (patch-diff-so-fancy-add-new-ruler-width-offset-configuration-option) = 5167d8fb34a0a4b8762e1e5d30eb28a31a308386
++SHA1 (patch-diff-so-fancy-fix-version-to-1.2.7) = bfb7ee9529a5ffbd62731b561e6bbdb466c3ee0a
+diff --git a/textproc/diff-so-fancy/patches/patch-diff-so-fancy-add-new-ruler-width-offset-configuration-option b/textproc/diff-so-fancy/patches/patch-diff-so-fancy-add-new-ruler-width-offset-configuration-option
+new file mode 100644
+index 000000000000..2bb655ae7996
+--- /dev/null
++++ b/textproc/diff-so-fancy/patches/patch-diff-so-fancy-add-new-ruler-width-offset-configuration-option
+@@ -0,0 +1,28 @@
++$NetBSD: patch-diff-so-fancy-add-new-ruler-width-offset-configuration-option,v 1.0 2019/01/29 12:51:07 joel Exp $
++
++Add new option named rulerWidthOffset that can be used instead of 
++rulerWidth to use the terminal window's width with a slight tweak.
++
++This can be desirable when combining diff-so-fancy with pagers like 
++vimpager, which has issues about wrapping lines too soon when they 
++contain concealed characters.
++--- diff-so-fancy.orig
+++++ diff-so-fancy
++@@ -23,6 +23,7 @@
++ my $mark_empty_lines           = git_config_boolean("diff-so-fancy.markEmptyLines","true");
++ my $use_unicode_dash_for_ruler = git_config_boolean("diff-so-fancy.useUnicodeRuler","true");
++ my $ruler_width                = git_config("diff-so-fancy.rulerWidth", undef);
+++my $ruler_width_offset         = git_config("diff-so-fancy.rulerWidthOffset", undef);
++ my $git_strip_prefix           = git_config_boolean("diff.noprefix","false");
++ my $has_stdin                  = has_stdin();
++ 
++@@ -558,7 +559,8 @@
++ # Print a line of em-dash or line-drawing chars the full width of the screen
++ sub horizontal_rule {
++ 	my $color = $_[0] || "";
++-	my $width = $ruler_width || `tput cols`;
+++	my $width_offset = $ruler_width_offset || 0;
+++	my $width = $ruler_width || (`tput cols` + $width_offset);
++ 
++ 	if (is_windows()) {
++ 		$width--;
+diff --git a/textproc/diff-so-fancy/patches/patch-diff-so-fancy-fix-version-to-1.2.7 b/textproc/diff-so-fancy/patches/patch-diff-so-fancy-fix-version-to-1.2.7
+new file mode 100644
+index 000000000000..4e2bf8c6abf4
+--- /dev/null
++++ b/textproc/diff-so-fancy/patches/patch-diff-so-fancy-fix-version-to-1.2.7
+@@ -0,0 +1,26 @@
++$NetBSD: patch-diff-so-fancy-fix-version-to-1.2.7,v 1.0 2019/01/29 12:51:32 joel Exp $
++
++Fix version number, which is supposed to be set at 1.2.7.
++--- diff-so-fancy.orig
+++++ diff-so-fancy
++@@ -1,6 +1,6 @@
++ #!/usr/bin/env perl
++ 
++-my $VERSION = "1.2.6";
+++my $VERSION = "1.2.7";
++ 
++ #################################################################################
++ 
++diff --git a/third_party/build_fatpack/diff-so-fancy b/third_party/build_fatpack/diff-so-fancy
++index 4df0aad..e3122e2 100755
++--- third_party/build_fatpack/diff-so-fancy.orig
+++++ third_party/build_fatpack/diff-so-fancy
++@@ -332,7 +332,7 @@ unshift @INC, bless \%fatpacked, $class;
++   } # END OF FATPACK CODE
++ 
++ 
++-my $VERSION = "1.2.6";
+++my $VERSION = "1.2.7";
++ 
++ #################################################################################
++ 
 -- 
-2.19.0
+2.23.0
 
