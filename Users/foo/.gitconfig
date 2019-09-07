@@ -26,4 +26,4 @@
 [diff-so-fancy]
 	stripLeadingSymbols = false
 	markEmptyLines = false
-	rulerWidth = 120
+	rulerWidthOffset = -20
