@@ -35,7 +35,7 @@ alias updatedb="pushd / && /usr/libexec/locate.updatedb ; popd"
 if [[ ${+commands[mdv]} -ne 0 ]]
 then
     function mdv() {
-        command mdv "$@" | ${PAGER}
+        command mdv "$@" | less -R
     }
 fi
 
