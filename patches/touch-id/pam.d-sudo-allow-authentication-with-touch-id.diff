@@ -1,0 +1,9 @@
+diff -ru a/sudo b/sudo
+--- a/sudo	2020-04-17 14:52:23.000000000 -0700
++++ b/sudo	2020-06-12 15:46:45.000000000 -0700
+@@ -1,4 +1,5 @@
+ # sudo: auth account password session
++auth       sufficient     pam_tid.so
+ auth       sufficient     pam_smartcard.so
+ auth       required       pam_opendirectory.so
+ account    required       pam_permit.so
