@@ -66,6 +66,7 @@ And here are some optional packages you might also want to install.
 ```
 # pkgin install mmv pstree
 # pkgin install p7zip pbzip2 unrar
+# pkgin install coreutils
 ```
 
 ### Terminal Markdown Viewer
