@@ -22,8 +22,8 @@ See [this page](https://pkgsrc.joyent.com/install-on-osx/) from Joyent's `pkgsrc
 Here's the simpler set of steps we can follow, where we simply skip checking the GPG signature.
 
 ```
-$ BOOTSTRAP_TAR="bootstrap-trunk-x86_64-20171103.tar.gz"
-$ BOOTSTRAP_SHA="d7bee3a08e6e07818ff445f042c469333c96ac22"
+$ BOOTSTRAP_TAR="bootstrap-trunk-x86_64-20200219.tar.gz"
+$ BOOTSTRAP_SHA="92992f79188a677f09cfa543499beef3f902017a"
 $ curl -O https://pkgsrc.joyent.com/packages/Darwin/bootstrap/${BOOTSTRAP_TAR}
 $ echo "${BOOTSTRAP_SHA}  ${BOOTSTRAP_TAR}" > check-shasum
 $ shasum -c check-shasum
