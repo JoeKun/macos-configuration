@@ -1,16 +1,16 @@
-From 65bcb384a5fad29852d70402757df78e5cf5491f Mon Sep 17 00:00:00 2001
+From 77c02037f3643a30131ae5536c4c075fb8b26a66 Mon Sep 17 00:00:00 2001
 From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
-Date: Thu, 31 Jan 2019 09:09:16 -0800
+Date: Sun, 2 Jan 2022 15:35:58 -0800
 Subject: [PATCH] Add package for diff-so-fancy.
 
 ---
  textproc/diff-so-fancy/DESCR                  |  2 ++
  textproc/diff-so-fancy/Makefile               | 28 +++++++++++++++++++
  textproc/diff-so-fancy/PLIST                  |  6 ++++
- textproc/diff-so-fancy/distinfo               |  8 ++++++
+ textproc/diff-so-fancy/distinfo               |  7 +++++
  ...ew-ruler-width-offset-configuration-option | 28 +++++++++++++++++++
  .../patch-diff-so-fancy-fix-version-to-1.2.7  | 26 +++++++++++++++++
- 6 files changed, 98 insertions(+)
+ 6 files changed, 97 insertions(+)
  create mode 100644 textproc/diff-so-fancy/DESCR
  create mode 100644 textproc/diff-so-fancy/Makefile
  create mode 100644 textproc/diff-so-fancy/PLIST
@@ -74,14 +74,13 @@ index 000000000000..61b9efacfc08
 +share/doc/diff-so-fancy/pro-tips.md
 diff --git a/textproc/diff-so-fancy/distinfo b/textproc/diff-so-fancy/distinfo
 new file mode 100644
-index 000000000000..e9305acaf9d1
+index 000000000000..f2aec2b0bcd3
 --- /dev/null
 +++ b/textproc/diff-so-fancy/distinfo
-@@ -0,0 +1,8 @@
-+$NetBSD: distinfo,v 1.0 2019/01/31 01:50:53 joel Exp $
+@@ -0,0 +1,7 @@
++$NetBSD: distinfo,v 1.1 2022/01/02 15:35:53 joel Exp $
 +
-+SHA1 (diff-so-fancy-1.2.7.tar.gz) = 0b574b3e7b983e943e5ce4f75129725aecec0cc6
-+RMD160 (diff-so-fancy-1.2.7.tar.gz) = 0f9e585f9bbd4d0b6b2633a80cc228e072eecd69
++BLAKE2s (diff-so-fancy-1.2.7.tar.gz) = 77773d0572859234d567fae2ba8eda0581db68f326f3001f6a9fc5a8adcf0c1c
 +SHA512 (diff-so-fancy-1.2.7.tar.gz) = 7399ac5487052b885ce35ae09c44ffb50d11ee6a219d1bac467250fb29d3c9233eaf9ec4b304bcec283bb1434bb825c819b9b5760fb068f6fa538685c2f2daa5
 +Size (diff-so-fancy-1.2.7.tar.gz) = 43582 bytes
 +SHA1 (patch-diff-so-fancy-add-new-ruler-width-offset-configuration-option) = 5167d8fb34a0a4b8762e1e5d30eb28a31a308386
@@ -153,5 +152,5 @@ index 000000000000..4e2bf8c6abf4
 + #################################################################################
 + 
 -- 
-2.23.0
+2.32.0
 

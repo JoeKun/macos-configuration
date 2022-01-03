@@ -1,14 +1,14 @@
-From 8ddb6eb0aa713e06f9a2200c7a19311f79753e72 Mon Sep 17 00:00:00 2001
+From 9bb534b61d064ea8edd856745f24336ef3e6f56b Mon Sep 17 00:00:00 2001
 From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
-Date: Thu, 31 Jan 2019 17:28:51 -0800
+Date: Sun, 2 Jan 2022 15:52:24 -0800
 Subject: [PATCH] vimpager: upgrade to 2.06 and backport from unreleased HEAD a
  fix that is required for compatibility with latest vim releases.
 
 ---
  misc/vimpager/Makefile                        |  19 +-
- misc/vimpager/distinfo                        |  11 +-
+ misc/vimpager/distinfo                        |  10 +-
  ...lor-capitalization-for-latest-vim-releases | 437 ++++++++++++++++++
- 3 files changed, 456 insertions(+), 11 deletions(-)
+ 3 files changed, 456 insertions(+), 10 deletions(-)
  create mode 100644 misc/vimpager/patches/patch-ansiesc_autoload_AnsiEsc.vim-fix-for-none-color-capitalization-for-latest-vim-releases
 
 diff --git a/misc/vimpager/Makefile b/misc/vimpager/Makefile
@@ -63,15 +63,14 @@ index 9bf346ec2741..9317a8d22aba 100644
  
  .include "../../mk/bsd.pkg.mk"
 diff --git a/misc/vimpager/distinfo b/misc/vimpager/distinfo
-index f43f1047313b..2ea64ef922dd 100644
+index 84a7aa3eeedf..c9feeb6d187d 100644
 --- a/misc/vimpager/distinfo
 +++ b/misc/vimpager/distinfo
-@@ -1,6 +1,7 @@
--$NetBSD: distinfo,v 1.5 2015/11/03 23:49:54 agc Exp $
-+$NetBSD: distinfo,v 2.0 2019/01/29 14:59:12 joel Exp $
+@@ -1,5 +1,7 @@
+-$NetBSD: distinfo,v 1.7 2021/10/26 10:59:36 nia Exp $
++$NetBSD: distinfo,v 2.0 2022/01/02 15:33:12 joel Exp $
  
--SHA1 (vimpager-1.8.9.tar.gz) = 332a84fec5bd2a4c2dae518d52b310dcaa49f417
--RMD160 (vimpager-1.8.9.tar.gz) = 6e00c2cbd8e4628d535dd6782652c61084c726c8
+-BLAKE2s (vimpager-1.8.9.tar.gz) = de7cf1987098ea1b9e04e9165cc4a755b62ad958404f41eaafd22426e9690249
 -SHA512 (vimpager-1.8.9.tar.gz) = 6544600d527159df69f94e976b42adb5fa8651b87ca3aa4e8da52aa197988e14b1efedf9850b6fdb9a9b5716eb1071a6bed45a3f10f41ab63e36eef91b1b3f97
 -Size (vimpager-1.8.9.tar.gz) = 11942 bytes
 +SHA1 (vimpager-2.06.tar.gz) = 4aa7feed1843e0b2554dd5110fbf031ba0889f9d
@@ -523,5 +522,5 @@ index 000000000000..730877f0736a
 + "  call Dret("AnsiEsc#AnsiEsc")
 + endfun
 -- 
-2.23.0
+2.32.0
 

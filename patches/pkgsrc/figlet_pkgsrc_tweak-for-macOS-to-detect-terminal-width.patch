@@ -1,4 +1,4 @@
-From 1a5e54081c9636c8793b10e74e83656e08db6f16 Mon Sep 17 00:00:00 2001
+From 654afe73ebdf629b7cb35c25d42038e1ec44077a Mon Sep 17 00:00:00 2001
 From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
 Date: Thu, 31 Jan 2019 14:12:23 -0800
 Subject: [PATCH] figlet: tweak Makefile to allow compiled binary for macOS to
@@ -31,5 +31,5 @@ index c6faaf900ec4..9caa8f5e49a9 100644
  MAKE_FLAGS+=	LDFLAGS=${LDFLAGS:Q}
  MAKE_FLAGS+=	MANDIR=${PREFIX}/${PKGMANDIR}/man6
 -- 
-2.23.0
+2.32.0
 

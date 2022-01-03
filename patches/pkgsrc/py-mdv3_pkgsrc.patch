@@ -1,0 +1,115 @@
+From ac091ab9f23e3d777c89227adf96f3c06e0d5d5a Mon Sep 17 00:00:00 2001
+From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
+Date: Sun, 2 Jan 2022 15:43:54 -0800
+Subject: [PATCH] Add package for py-mdv3.
+
+---
+ devel/py-mdv3/DESCR    | 10 ++++++++++
+ devel/py-mdv3/Makefile | 30 ++++++++++++++++++++++++++++++
+ devel/py-mdv3/PLIST    | 27 +++++++++++++++++++++++++++
+ devel/py-mdv3/distinfo |  5 +++++
+ 4 files changed, 72 insertions(+)
+ create mode 100644 devel/py-mdv3/DESCR
+ create mode 100644 devel/py-mdv3/Makefile
+ create mode 100644 devel/py-mdv3/PLIST
+ create mode 100644 devel/py-mdv3/distinfo
+
+diff --git a/devel/py-mdv3/DESCR b/devel/py-mdv3/DESCR
+new file mode 100644
+index 000000000000..d3ca83222779
+--- /dev/null
++++ b/devel/py-mdv3/DESCR
+@@ -0,0 +1,10 @@
++When you edit multiple md files remotely, like in a larger mkdocs project,
++context switches between editing terminal(s) and viewing browser may have some
++efficiency impact. Also sometimes there is just no browser, like via security
++gateways offering just a fixed set of applications on the hop in machine.
++Further, reading efficiency and convenience is often significantly improved by
++using colors. And lastly, using such a thing for cli applications might improve
++user output, e.g. for help texts.
++
++This is where mdv, a Python based Markdown viewer for the terminal might be a
++good option.
+diff --git a/devel/py-mdv3/Makefile b/devel/py-mdv3/Makefile
+new file mode 100644
+index 000000000000..5899edaa7152
+--- /dev/null
++++ b/devel/py-mdv3/Makefile
+@@ -0,0 +1,30 @@
++# $NetBSD: Makefile,v 1.0 2022/01/01 21:07:43 joel Exp $
++
++DISTNAME=	mdv3-2.0.2
++PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
++CATEGORIES=	devel
++MASTER_SITES=	${MASTER_SITE_GITHUB:=WillNye/}
++GITHUB_PROJECT=	terminal_markdown_viewer
++GITHUB_TAG=     refs/tags/${PKGVERSION_NOREV}
++EXTRACT_SUFX=   .tar.gz
++
++MAINTAINER=	willbeas88@gmail.com
++HOMEPAGE=	https://github.com/WillNye/terminal_markdown_viewer/
++COMMENT=	Terminal markdown viewer
++LICENSE=	2-clause-bsd
++
++USE_LANGUAGES=	# none
++
++DEPENDS+=	${PYPKGPREFIX}-docopt>=0.6.2:../../devel/py-docopt
++DEPENDS+=	${PYPKGPREFIX}-markdown>=3.2.2:../../textproc/py-markdown
++DEPENDS+=	${PYPKGPREFIX}-pygments>=2.10.0:../../textproc/py-pygments
++DEPENDS+=	${PYPKGPREFIX}-yaml>=5.4.1:../../textproc/py-yaml
++DEPENDS+=	${PYPKGPREFIX}-tabulate>=0.8.9:../../textproc/py-tabulate
++
++PYTHON_VERSIONS_ACCEPTED=	39
++PY_PATCHPLIST=	yes
++
++WRKSRC=		${WRKDIR}/${GITHUB_PROJECT}-${PKGVERSION_NOREV}
++
++.include "../../lang/python/egg.mk"
++.include "../../mk/bsd.pkg.mk"
+diff --git a/devel/py-mdv3/PLIST b/devel/py-mdv3/PLIST
+new file mode 100644
+index 000000000000..a12d6bd8baab
+--- /dev/null
++++ b/devel/py-mdv3/PLIST
+@@ -0,0 +1,27 @@
++@comment $NetBSD: PLIST,v 1.0 2022/01/01 21:07:07 joel Exp $
++bin/mdv
++${PYSITELIB}/mdv/__init__.py
++${PYSITELIB}/mdv/__init__.pyc
++${PYSITELIB}/mdv/__init__.pyo
++${PYSITELIB}/mdv/ansi_tables.json
++${PYSITELIB}/mdv/markdownviewer.py
++${PYSITELIB}/mdv/markdownviewer.pyc
++${PYSITELIB}/mdv/markdownviewer.pyo
++${PYSITELIB}/mdv/tabulate.py
++${PYSITELIB}/mdv/tabulate.pyc
++${PYSITELIB}/mdv/tabulate.pyo
++${PYSITELIB}/mdv/tests/__init__.py
++${PYSITELIB}/mdv/tests/__init__.pyc
++${PYSITELIB}/mdv/tests/__init__.pyo
++${PYSITELIB}/mdv/tests/test_files.py
++${PYSITELIB}/mdv/tests/test_files.pyc
++${PYSITELIB}/mdv/tests/test_files.pyo
++${PYSITELIB}/mdv/tests/test_inline.py
++${PYSITELIB}/mdv/tests/test_inline.pyc
++${PYSITELIB}/mdv/tests/test_inline.pyo
++${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
++${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
++${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
++${PYSITELIB}/${EGG_INFODIR}/entry_points.txt
++${PYSITELIB}/${EGG_INFODIR}/requires.txt
++${PYSITELIB}/${EGG_INFODIR}/top_level.txt
+diff --git a/devel/py-mdv3/distinfo b/devel/py-mdv3/distinfo
+new file mode 100644
+index 000000000000..f3efaac80feb
+--- /dev/null
++++ b/devel/py-mdv3/distinfo
+@@ -0,0 +1,5 @@
++$NetBSD: distinfo,v 1.0 2022/01/01 21:06:20 joel Exp $
++
++BLAKE2s (mdv3-2.0.2.tar.gz) = 763776695ece6523ddc2848fc62130e8e4041fcdd5d462841d3641d035dbd93a
++SHA512 (mdv3-2.0.2.tar.gz) = ca04cef2833e79a3dd48f2a5b51d7e9d8b53ae2696d6a248ada79f2845a064973d4efac6d32ef92ea200f0b20714c8236b92e68b0b500a9ed50117b8b4c2e8cd
++Size (mdv3-2.0.2.tar.gz) = 1562448 bytes
+-- 
+2.32.0
+
