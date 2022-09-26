@@ -22,12 +22,10 @@ See [this page](https://pkgsrc.joyent.com/install-on-osx/) from Joyent's `pkgsrc
 Here's the simpler set of steps we can follow, where we simply skip checking the GPG signature.
 
 ```
-$ BOOTSTRAP_TAR="bootstrap-macos11-trunk-x86_64-20211207.tar.gz"
-$ BOOTSTRAP_SHA="07e323065708223bbac225d556b6aa5921711e0a"
-$ curl -O https://pkgsrc.joyent.com/packages/Darwin/bootstrap/${BOOTSTRAP_TAR}
-$ echo "${BOOTSTRAP_SHA}  ${BOOTSTRAP_TAR}" > check-shasum
-$ shasum -c check-shasum
-$ rm -f check-shasum
+$ BOOTSTRAP_TAR="bootstrap-macos11-trunk-arm64-20220913.tar.gz"
+$ BOOTSTRAP_SHA="97a1ee6b11b30529de6facf27e2042d602ca6af8"
+$ curl -O https://pkgsrc.smartos.org/packages/Darwin/bootstrap/${BOOTSTRAP_TAR}
+$ echo "${BOOTSTRAP_SHA}  ${BOOTSTRAP_TAR}" | shasum -c-
 $ sudo tar -zxpf ${BOOTSTRAP_TAR} -C /
 ```
 
@@ -90,7 +88,7 @@ That said, those instructions are lacking in some ways. Here are a few more thin
 $ cd /Volumes/data/packages/Darwin/11.0
 $ mkdir trunk
 $ cd trunk
-$ ln -s ../x86_64 tools
+$ ln -s ../arm64 tools
 ```
 
 ### Install additional tools
@@ -130,18 +128,18 @@ $ sudo -s
 # export HOME=/var/root
 # cd /Volumes/data/pkgsrc/bootstrap
 # export CFLAGS="-pipe -Os"
-# ./bootstrap --prefix /opt/pkg --pkgdbdir /opt/pkg/.pkgdb --pkgmandir=share/man --varbase /var --sysconfbase /etc --mk-fragment /Volumes/data/pkgbuild/conf/macos11-trunk-x86_64/mk-fragment.conf --workdir /tmp/pkgsrc-macos11-trunk-x86_64 --make-jobs 2
+# ./bootstrap --prefix /opt/pkg --pkgdbdir /opt/pkg/.pkgdb --pkgmandir=share/man --varbase /var --sysconfbase /etc --mk-fragment /Volumes/data/pkgbuild/conf/macos11-trunk-arm64/mk-fragment.conf --workdir /tmp/pkgsrc-macos11-trunk-arm64 --make-jobs 2
 # cd /opt/pkg
 # mkdir .fseventsd
 # touch .fseventsd/no_log
 # touch .metadata_never_index
 # cd /
-# tar cvzf /var/root/bootstrap-macos11-trunk-x86_64.tar.gz opt
-# chown pbulk:staff /var/root/bootstrap-macos11-trunk-x86_64.tar.gz
-# mv /var/root/bootstrap-macos11-trunk-x86_64.tar.gz /Volumes/data/packages/Darwin/bootstrap-pbulk
+# tar cvzf /var/root/bootstrap-macos11-trunk-arm64.tar.gz opt
+# chown pbulk:staff /var/root/bootstrap-macos11-trunk-arm64.tar.gz
+# mv /var/root/bootstrap-macos11-trunk-arm64.tar.gz /Volumes/data/packages/Darwin/bootstrap-pbulk
 # cd /Volumes/data/pkgsrc/bootstrap
 # ./cleanup
-# rm -R -f /opt/pkg /tmp/pkgsrc-macos11-trunk-x86_64
+# rm -R -f /opt/pkg /tmp/pkgsrc-macos11-trunk-arm64
 ```
 
 ### Build tools bootstrap package
@@ -151,18 +149,18 @@ $ sudo -s
 # export HOME=/var/root
 # cd /Volumes/data/pkgsrc/bootstrap
 # export CFLAGS="-pipe -Os"
-# ./bootstrap --prefix /opt/tools --pkgdbdir /opt/tools/.pkgdb --pkgmandir=share/man --sysconfbase /etc --mk-fragment /Volumes/data/pkgbuild/conf/macos11-trunk-tools/mk-fragment.conf --workdir /tmp/pkgsrc-macos11-trunk-tools --make-jobs 2
+# ./bootstrap --prefix /opt/tools --pkgdbdir /opt/tools/.pkgdb --pkgmandir=share/man --sysconfbase /etc --mk-fragment /Volumes/data/pkgbuild/conf/macos11-trunk-arm64-tools/mk-fragment.conf --workdir /tmp/pkgsrc-macos11-trunk-arm64-tools --make-jobs 2
 # cd /opt/tools
 # mkdir .fseventsd
 # touch .fseventsd/no_log
 # touch .metadata_never_index
 # cd /
-# tar cvzf /var/root/bootstrap-macos11-trunk-tools.tar.gz opt
-# chown pbulk:staff /var/root/bootstrap-macos11-trunk-tools.tar.gz
-# mv /var/root/bootstrap-macos11-trunk-tools.tar.gz /Volumes/data/packages/Darwin/bootstrap-pbulk
+# tar cvzf /var/root/bootstrap-macos11-trunk-arm64-tools.tar.gz opt
+# chown pbulk:staff /var/root/bootstrap-macos11-trunk-arm64-tools.tar.gz
+# mv /var/root/bootstrap-macos11-trunk-arm64-tools.tar.gz /Volumes/data/packages/Darwin/bootstrap-pbulk
 # cd /Volumes/data/pkgsrc/bootstrap
 # ./cleanup
-# rm -R -f /opt/tools /tmp/pkgsrc-macos11-trunk-tools
+# rm -R -f /opt/tools /tmp/pkgsrc-macos11-trunk-arm64-tools
 ```
 
 ### Sandbox setup
@@ -172,20 +170,20 @@ Create a sandbox environment as `root`:
 ```
 $ sudo -s
 # export HOME=/var/root
-# run-sandbox macos11-trunk-x86_64
+# run-sandbox macos11-trunk-arm64
 ```
 
 Once you've done that, you need to manually mount `/usr/local` in the sandbox environment, in order to be able to use `pandoc`, which was installed previously in `/usr/local`. To do that, open a new tab in your Terminal window, and run the following commands:
 
 ```
 $ sudo -s
-# mount localhost:/usr/local /Volumes/data/chroot/dev-macos11-trunk-x86_64/usr/local
+# mount localhost:/usr/local /Volumes/data/chroot/dev-macos11-trunk-arm64/usr/local
 ```
 
 Back in the first tab with the sandbox shell, add `/usr/local/bin` to the `PATH`:
 
 ```
---<root@pkgsrc>-(/Volumes/data/chroot/dev-macos11-trunk-x86_64)-<~>--
+--<root@pkgsrc>-(/Volumes/data/chroot/dev-macos11-trunk-arm64)-<~>--
 -> export PATH="/usr/local/bin:${PATH}"
 ```
 
@@ -194,7 +192,7 @@ Then build your custom packages as needed.
 Once you're completely finished with the sandbox, go back to the second tab where you mounted `/usr/local`, and unmount it manually:
 
 ```
-# umount /Volumes/data/chroot/dev-macos11-trunk-x86_64/usr/local
+# umount /Volumes/data/chroot/dev-macos11-trunk-arm64/usr/local
 ```
 
 You can now logout from that tab and close it.
