@@ -57,7 +57,7 @@ However, we also require a few custom binary packages, that are made available i
 ```
 # pkgin install fortune par vim colordiff wget
 # pkg_add -C /dev/null pkgsrc-macos-binary-packages/packages/figlet-2.2.5nb2.tgz
-# pkg_add -C /dev/null pkgsrc-macos-binary-packages/packages/vimpager-2.06nb1.tgz
+# pkg_add -C /dev/null pkgsrc-macos-binary-packages/packages/vimpager-2.07-alpha-1.tgz
 # pkg_add -C /dev/null pkgsrc-macos-binary-packages/packages/diff-so-fancy-1.2.7nb1.tgz
 ```
 

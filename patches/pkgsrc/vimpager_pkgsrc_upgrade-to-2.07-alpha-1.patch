@@ -1,0 +1,119 @@
+From 567441f3e1ab9bf9d9516d3451a5dadd7147f8a6 Mon Sep 17 00:00:00 2001
+From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
+Date: Sun, 2 Jan 2022 15:52:24 -0800
+Subject: [PATCH] vimpager: upgrade to 2.07-alpha-1 (i.e. current state of
+ top-of-tree in the repository).
+
+---
+ misc/vimpager/Makefile | 34 +++++++++++++++++++---------------
+ misc/vimpager/PLIST    | 21 ++++++++++++++++++++-
+ misc/vimpager/distinfo |  8 ++++----
+ 3 files changed, 43 insertions(+), 20 deletions(-)
+
+diff --git a/misc/vimpager/Makefile b/misc/vimpager/Makefile
+index 9bf346ec2741..cda0b8ec576a 100644
+--- a/misc/vimpager/Makefile
++++ b/misc/vimpager/Makefile
+@@ -1,35 +1,39 @@
+-# $NetBSD: Makefile,v 1.9 2018/07/04 13:40:25 jperkin Exp $
++# $NetBSD: Makefile,v 1.9.7 2022/09/26 15:12:25 joel Exp $
+ 
+-DISTNAME=	vimpager-1.8.9
++PKGNAME=	vimpager-2.07-alpha-1
+ CATEGORIES=	misc
+-MASTER_SITES=	${MASTER_SITE_GITHUB:=rkitover/}
+-
+-MAINTAINER=	nonakap@gmail.com
++GITHUB_PROJECT=	vimpager
++GHCOMMIT=	1a20981e63ade5f890a90a75194d6c7d74d5e4c3
++MASTER_SITES=	https://github.com/rkitover/vimpager/archive/
++DISTNAME=	${GHCOMMIT}
++DIST_SUBDIR=	${GITHUB_PROJECT}
++WRKSRC=		${WRKDIR}/${GITHUB_PROJECT}-${GHCOMMIT}
++
++MAINTAINER=	rkitover@gmail.com
+ HOMEPAGE=	https://www.vim.org/scripts/script.php?script_id=1723
+ COMMENT=	Use ViM as PAGER
+ LICENSE=	2-clause-bsd
+ 
+ DEPENDS+=	vim{,-gtk2,-gtk3,-motif,-xaw}>=7.0:../../editors/vim
+ 
+-NO_BUILD=	yes
+-
+-USE_TOOLS+=	sh:run bash:run
++USE_TOOLS+=	sh:run bash:run gmake
+ 
+ SUBST_CLASSES+=		vimpager
+-SUBST_STAGE.vimpager=	pre-configure
++SUBST_STAGE.vimpager=	post-build
++SUBST_MESSAGE.vimpager=	Fixing configuration file path.
+ SUBST_FILES.vimpager=	vimpager
+ SUBST_SED.vimpager=	-e 's,/usr/local/etc/,${PKG_SYSCONFDIR}/,g'
+ 
+-SUBST_CLASSES+=		manpath
+-SUBST_STAGE.manpath=	pre-install
+-SUBST_FILES.manpath=	Makefile
+-SUBST_SED.manpath=	-e 's,/share/man/,/${PKGMANDIR}/,g'
+-
+ CONF_FILES+=		share/examples/vimpager/vimpagerrc ${PKG_SYSCONFDIR}/vimpagerrc
+ 
+ REPLACE_BASH+=		vimcat
+ REPLACE_SH+=		vimpager
+ 
+-INSTALL_MAKE_FLAGS+=	SYSCONFDIR=${PREFIX}/share/examples/vimpager
++INSTALL_MAKE_FLAGS+=	PREFIX=${PREFIX} SYSCONFDIR=${PREFIX}/share/examples/vimpager
++
++# For some reason I don't quite understand, the extraction leads to all
++# files being group writeable.
++post-extract:
++	${CHMOD} -R g-w "${WRKSRC}"
+ 
+ .include "../../mk/bsd.pkg.mk"
+diff --git a/misc/vimpager/PLIST b/misc/vimpager/PLIST
+index 2b77d5ad0817..9452096da464 100644
+--- a/misc/vimpager/PLIST
++++ b/misc/vimpager/PLIST
+@@ -1,6 +1,25 @@
+-@comment $NetBSD: PLIST,v 1.2 2014/09/20 12:00:42 obache Exp $
++@comment $NetBSD$
+ bin/vimcat
+ bin/vimpager
+ man/man1/vimcat.1
+ man/man1/vimpager.1
++share/doc/vimpager/ChangeLog_vimcat.yml
++share/doc/vimpager/ChangeLog_vimpager.yml
++share/doc/vimpager/DOC_AUTHORS.yml
++share/doc/vimpager/TODO.yml
++share/doc/vimpager/copyright
++share/doc/vimpager/html/vimcat.html
++share/doc/vimpager/html/vimpager.html
++share/doc/vimpager/uganda.txt
++share/doc/vimpager/vimcat.md
++share/doc/vimpager/vimpager.md
+ share/examples/vimpager/vimpagerrc
++share/vimpager/autoload/AnsiEsc.vim
++share/vimpager/autoload/vimcat.vim
++share/vimpager/autoload/vimpager.vim
++share/vimpager/autoload/vimpager_utils.vim
++share/vimpager/macros/less.vim
++share/vimpager/plugin/AnsiEscPlugin.vim
++share/vimpager/plugin/cecutil.vim
++share/vimpager/plugin/vimpager.vim
++share/vimpager/syntax/perldoc.vim
+diff --git a/misc/vimpager/distinfo b/misc/vimpager/distinfo
+index 84a7aa3eeedf..8719fad66d91 100644
+--- a/misc/vimpager/distinfo
++++ b/misc/vimpager/distinfo
+@@ -1,5 +1,5 @@
+-$NetBSD: distinfo,v 1.7 2021/10/26 10:59:36 nia Exp $
++$NetBSD: distinfo,v 1.9.7 2022/09/26 15:42:12 joel Exp $
+ 
+-BLAKE2s (vimpager-1.8.9.tar.gz) = de7cf1987098ea1b9e04e9165cc4a755b62ad958404f41eaafd22426e9690249
+-SHA512 (vimpager-1.8.9.tar.gz) = 6544600d527159df69f94e976b42adb5fa8651b87ca3aa4e8da52aa197988e14b1efedf9850b6fdb9a9b5716eb1071a6bed45a3f10f41ab63e36eef91b1b3f97
+-Size (vimpager-1.8.9.tar.gz) = 11942 bytes
++BLAKE2s (vimpager/1a20981e63ade5f890a90a75194d6c7d74d5e4c3.tar.gz) = 725ce6a90febc414fb8a58b6dd9ceed0739de3491c1dc9c281c213ecd84f48e0
++SHA512 (vimpager/1a20981e63ade5f890a90a75194d6c7d74d5e4c3.tar.gz) = e31610b09235aeb4eed5f8489e920ea518674dcd510e442cb76a0aee49c1811ebec9aa7cd658bc5ae903f7f5597218eaf16699e451aa799963d9b215bff0e14d
++Size (vimpager/1a20981e63ade5f890a90a75194d6c7d74d5e4c3.tar.gz) = 164358 bytes
+-- 
+2.37.0
+
