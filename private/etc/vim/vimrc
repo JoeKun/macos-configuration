@@ -10,6 +10,10 @@
 " ':help options.txt' ou ':help parameter_name' in Vim
 " to have some help on this configuration file parameters
 
+" Add /etc/vim to runtimepath to allow for system wide global
+" plugins and other configuration such as file type syntax definitions
+set runtimepath+=/etc/vim
+
 " Visual bell rather than beep for alerts
 set vb
 
@@ -19,7 +23,7 @@ syntax on
 " Defines the color scheme used
 " The available color schemes are the files with the extension .vim
 " in the directory /usr/share/vim/vimcurrent/colors/
-colorscheme delek
+colorscheme delek-original
 
 " Prints the cursor position 'row,column'
 set ruler
@@ -128,8 +132,3 @@ autocmd VimEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Uncomment the following line if you want to display line numbers
 "set number
-
-" Add /etc/vim to runtimepath to allow for system wide global
-" plugins and other configuration such as file type syntax definitions
-set runtimepath+=/etc/vim
-
