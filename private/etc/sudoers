@@ -50,7 +50,7 @@ root		ALL = (ALL)	ALL
 # %admin	ALL = (ALL)	NOPASSWD:/path/to/some/script
 
 # Members of the admin group may run anything without password.
-%admin		ALL = (ALL)	NOPASSWD: ALL
+# %admin		ALL = (ALL)	NOPASSWD: ALL
 
 ## Read drop-in files from /private/etc/sudoers.d
 ## (the '#' here does not indicate a comment)
