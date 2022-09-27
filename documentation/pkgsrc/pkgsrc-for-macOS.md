@@ -72,9 +72,9 @@ And here are some optional packages you might also want to install.
 ### Terminal Markdown Viewer
 
 ```
-# pkgin install py39-docopt py39-markdown py39-pygments py39-yaml py39-tabulate
-# pkg_add -C /dev/null pkgsrc-macos-binary-packages/packages/py39-mdv3-2.0.2.tgz
-# pkgin unkeep py39-docopt py39-markdown py39-pygments py39-yaml py39-tabulate
+# pkgin install py310-docopt py310-expat py310-markdown py310-pygments py310-yaml py310-tabulate
+# pkg_add -C /dev/null pkgsrc-macos-binary-packages/packages/py310-mdv3-2.0.2.tgz
+# pkgin unkeep py310-docopt py310-expat py310-markdown py310-pygments py310-yaml py310-tabulate
 ```
 
 

@@ -1,14 +1,14 @@
-From ac091ab9f23e3d777c89227adf96f3c06e0d5d5a Mon Sep 17 00:00:00 2001
+From 93bd6896b26c9a6eb411cf10e722442d372261ff Mon Sep 17 00:00:00 2001
 From: Joel Lopes Da Silva <joel@lopes-da-silva.com>
 Date: Sun, 2 Jan 2022 15:43:54 -0800
 Subject: [PATCH] Add package for py-mdv3.
 
 ---
  devel/py-mdv3/DESCR    | 10 ++++++++++
- devel/py-mdv3/Makefile | 30 ++++++++++++++++++++++++++++++
+ devel/py-mdv3/Makefile | 31 +++++++++++++++++++++++++++++++
  devel/py-mdv3/PLIST    | 27 +++++++++++++++++++++++++++
  devel/py-mdv3/distinfo |  5 +++++
- 4 files changed, 72 insertions(+)
+ 4 files changed, 73 insertions(+)
  create mode 100644 devel/py-mdv3/DESCR
  create mode 100644 devel/py-mdv3/Makefile
  create mode 100644 devel/py-mdv3/PLIST
@@ -32,10 +32,10 @@ index 000000000000..d3ca83222779
 +good option.
 diff --git a/devel/py-mdv3/Makefile b/devel/py-mdv3/Makefile
 new file mode 100644
-index 000000000000..5899edaa7152
+index 000000000000..3ab0fa587035
 --- /dev/null
 +++ b/devel/py-mdv3/Makefile
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,31 @@
 +# $NetBSD: Makefile,v 1.0 2022/01/01 21:07:43 joel Exp $
 +
 +DISTNAME=	mdv3-2.0.2
@@ -54,12 +54,13 @@ index 000000000000..5899edaa7152
 +USE_LANGUAGES=	# none
 +
 +DEPENDS+=	${PYPKGPREFIX}-docopt>=0.6.2:../../devel/py-docopt
++DEPENDS+=	${PYPKGPREFIX}-expat>=3.10.0:../../textproc/py-expat
 +DEPENDS+=	${PYPKGPREFIX}-markdown>=3.2.2:../../textproc/py-markdown
 +DEPENDS+=	${PYPKGPREFIX}-pygments>=2.10.0:../../textproc/py-pygments
 +DEPENDS+=	${PYPKGPREFIX}-yaml>=5.4.1:../../textproc/py-yaml
 +DEPENDS+=	${PYPKGPREFIX}-tabulate>=0.8.9:../../textproc/py-tabulate
 +
-+PYTHON_VERSIONS_ACCEPTED=	39
++PYTHON_VERSIONS_ACCEPTED=	310
 +PY_PATCHPLIST=	yes
 +
 +WRKSRC=		${WRKDIR}/${GITHUB_PROJECT}-${PKGVERSION_NOREV}
@@ -111,5 +112,5 @@ index 000000000000..f3efaac80feb
 +SHA512 (mdv3-2.0.2.tar.gz) = ca04cef2833e79a3dd48f2a5b51d7e9d8b53ae2696d6a248ada79f2845a064973d4efac6d32ef92ea200f0b20714c8236b92e68b0b500a9ed50117b8b4c2e8cd
 +Size (mdv3-2.0.2.tar.gz) = 1562448 bytes
 -- 
-2.32.0
+2.37.0
 
