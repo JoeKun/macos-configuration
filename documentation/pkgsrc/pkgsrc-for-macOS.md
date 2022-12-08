@@ -17,13 +17,13 @@ Some of those reasons are also explained in [this blog post](https://derflounder
 
 We'll be using the precompiled `pkgsrc` and `pkgin` distribution maintained by Joyent.
 
-See [this page](https://pkgsrc.joyent.com/install-on-osx/) from Joyent's `pkgsrc` website to see up-to-date and complete installation instructions.
+See [this page](https://pkgsrc.joyent.com/install-on-macos/) from Joyent's `pkgsrc` website to see up-to-date and complete installation instructions.
 
 Here's the simpler set of steps we can follow, where we simply skip checking the GPG signature.
 
 ```
-$ BOOTSTRAP_TAR="bootstrap-macos11-trunk-arm64-20220913.tar.gz"
-$ BOOTSTRAP_SHA="97a1ee6b11b30529de6facf27e2042d602ca6af8"
+$ BOOTSTRAP_TAR="bootstrap-macos11-trunk-arm64-20220928.tar.gz"
+$ BOOTSTRAP_SHA="a6e3a805eba4b3522b6da0a590bda945a34e49dd"
 $ curl -O https://pkgsrc.smartos.org/packages/Darwin/bootstrap/${BOOTSTRAP_TAR}
 $ echo "${BOOTSTRAP_SHA}  ${BOOTSTRAP_TAR}" | shasum -c-
 $ sudo tar -zxpf ${BOOTSTRAP_TAR} -C /
